@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VerifyJWT name="Auth-JWT-Verify">
+    <DisplayName>JWT Verification Policy</DisplayName>
+    <Properties/>
+    <Audience>schoolbus-api</Audience>
+    <ExpiresIn>1h</ExpiresIn>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    <SecretKey ref="private.jwt_signing_key"/>
+    <Source>request.header.authorization</Source>
+    <Issuer>schoolbus-auth-service</Issuer>
+    <Subject>schoolbus-app</Subject>
+    <SourcePrefix>Bearer </SourcePrefix>
+    <UseSystemTime>true</UseSystemTime>
+    <JWTDecoding>true</JWTDecoding>
+</VerifyJWT>
