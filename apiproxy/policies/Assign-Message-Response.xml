@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage name="Assign-Message-Response">
+    <DisplayName>Response Message Transformation</DisplayName>
+    <Properties/>
+    <Add>
+        <Headers>
+            <Header name="X-SchoolBus-Api-Version">v1</Header>
+            <Header name="X-Response-Time">{system.timestamp}</Header>
+        </Headers>
+    </Add>
+    <Remove>
+        <Headers>
+            <Header name="Server"/>
+        </Headers>
+    </Remove>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>
