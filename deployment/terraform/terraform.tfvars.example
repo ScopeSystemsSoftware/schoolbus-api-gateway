@@ -1,0 +1,4 @@
+project_id      = "schoolbus-platform-12345"
+region          = "us-central1"
+environment     = "dev"
+proxy_bundle_path = "gs://schoolbus-apigee-bundles/schoolbus-api.zip"
