@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description>Default Proxy Endpoint</Description>
+    <FaultRules>
+        <FaultRule name="invalid_token_rule">
+            <Condition>fault.name = "InvalidToken"</Condition>
+            <Step>
+                <Name>Error-Handling</Name>
+            </Step>
+        </FaultRule>
+        <FaultRule name="quota_violation_rule">
+            <Condition>fault.name = "QuotaViolation"</Condition>
+            <Step>
+                <Name>Error-Handling</Name>
+            </Step>
+        </FaultRule>
+    </FaultRules>
+    <PreFlow>
+        <Request>
+            <Step>
+                <Name>Response-CORS</Name>
+            </Step>
+            <Step>
+                <Name>Quota-Rate-Limit</Name>
+            </Step>
+        </Request>
+        <Response>
+            <Step>
+                <Name>Response-CORS</Name>
+            </Step>
+        </Response>
+    </PreFlow>
+    <Flows>
+        <Flow name="Auth Service Flow">
+            <Description>Flow for Auth Service</Description>
+            <Condition>proxy.pathsuffix MatchesPath "/api/v1/auth/**" OR proxy.pathsuffix MatchesPath "/api/v1/users/**"</Condition>
+            <Request>
+                <Step>
+                    <Name>Assign-Message-Request</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>Assign-Message-Response</Name>
+                </Step>
+            </Response>
+        </Flow>
+        <Flow name="School Service Flow">
+            <Description>Flow for School Service</Description>
+            <Condition>proxy.pathsuffix MatchesPath "/api/v1/schools/**"</Condition>
+            <Request>
+                <Step>
+                    <Name>Auth-JWT-Verify</Name>
+                </Step>
+                <Step>
+                    <Name>Assign-Message-Request</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>Assign-Message-Response</Name>
+                </Step>
+            </Response>
+        </Flow>
+    </Flows>
+    <PostFlow>
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/schoolbus</BasePath>
+        <Properties/>
+        <VirtualHost>default</VirtualHost>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="auth-service-rule">
+        <Condition>proxy.pathsuffix MatchesPath "/api/v1/auth/**" OR proxy.pathsuffix MatchesPath "/api/v1/users/**"</Condition>
+        <TargetEndpoint>auth-service</TargetEndpoint>
+    </RouteRule>
+    <RouteRule name="school-service-rule">
+        <Condition>proxy.pathsuffix MatchesPath "/api/v1/schools/**"</Condition>
+        <TargetEndpoint>school-service</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>
