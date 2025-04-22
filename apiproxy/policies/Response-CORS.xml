@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CORS name="Response-CORS">
+    <DisplayName>CORS Policy</DisplayName>
+    <AllowOrigins>
+        <Origin>*</Origin>
+    </AllowOrigins>
+    <AllowMethods>
+        <Method>GET</Method>
+        <Method>POST</Method>
+        <Method>PUT</Method>
+        <Method>DELETE</Method>
+        <Method>PATCH</Method>
+        <Method>OPTIONS</Method>
+    </AllowMethods>
+    <AllowHeaders>
+        <Header>origin</Header>
+        <Header>x-requested-with</Header>
+        <Header>accept</Header>
+        <Header>content-type</Header>
+        <Header>authorization</Header>
+    </AllowHeaders>
+    <ExposeHeaders/>
+    <MaxAge>3600</MaxAge>
+    <AllowCredentials>false</AllowCredentials>
+</CORS>
