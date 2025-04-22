@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage name="Error-Handling">
+    <DisplayName>Error Handling Policy</DisplayName>
+    <Properties/>
+    <Set>
+        <Headers>
+            <Header name="Content-Type">application/json</Header>
+        </Headers>
+        <Payload contentType="application/json" variablePrefix="%" variableSuffix="#">
+        {
+            "error": {
+                "code": "%fault.name#",
+                "message": "%fault.reason#",
+                "status": "%message.status.code#",
+                "timestamp": "%system.timestamp#"
+            }
+        }
+        </Payload>
+        <StatusCode>%message.status.code#</StatusCode>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>
