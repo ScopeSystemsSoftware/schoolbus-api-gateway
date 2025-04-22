@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage name="Assign-Message-Request">
+    <DisplayName>Request Message Transformation</DisplayName>
+    <Properties/>
+    <Add>
+        <Headers>
+            <Header name="X-SchoolBus-Api-Version">v1</Header>
+            <Header name="X-Request-ID">{request.id}</Header>
+        </Headers>
+    </Add>
+    <Remove>
+        <Headers>
+            <Header name="Host"/>
+        </Headers>
+    </Remove>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>
