@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "name": "schoolbus-api",
+  "description": "SchoolBus API Gateway",
+  "displayName": "SchoolBus API",
+  "configurationVersion": {
+    "major": 4,
+    "minor": 0
+  },
+  "policies": [
+    "Auth-JWT-Verify.xml",
+    "Quota-Rate-Limit.xml",
+    "Response-CORS.xml",
+    "Assign-Message-Request.xml",
+    "Assign-Message-Response.xml",
+    "Error-Handling.xml",
+    "OAuth-Verify.xml"
+  ],
+  "proxies": [
+    "default.xml",
+    "auth-service.xml",
+    "school-service.xml"
+  ],
+  "targets": [
+    "auth-service.xml",
+    "school-service.xml"
+  ]
+}
